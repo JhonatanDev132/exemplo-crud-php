@@ -17,7 +17,7 @@ function lerFabricantes(PDO $conexao){
     Buscar todos os dados da consulta como um array associativo. */
     $resultado =$consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch(Exception $erro){
-        die("erro, animal detectado");
+        die("Deu ruim");
     }
 
     return $resultado;
@@ -25,5 +25,22 @@ function lerFabricantes(PDO $conexao){
 
 // Teste 
 $dados = lerFabricantes($conexao);
-var_dump($dados)
+var_dump($dados);
+
+// Usada em fabricantes/inserir.php
+function inserirFabricante(PDO $conexao, string $nomeDoFabricante){
+    $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+
+        // bindValue() -> Permite vincular o valor existente no parâmetro nomeado (:nome) à consulta que será executada.
+        // É necessário indicar qual é o parametro (:nome), de onde vem o valor ($nomeDoFabricante) e de que tipo ele é (PDO::PARAM_STR)
+        $consulta->bindValue(':nome', $nomeDoFabricante, PDO::PARAM_STR);
+
+        $consulta->execute();
+    } catch (Exception $erro) {
+        die("Erro ao inserir: ".$erro->getMessage());
+    }
+} // fim inserirFabricante
 ?>
