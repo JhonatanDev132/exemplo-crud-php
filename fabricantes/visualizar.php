@@ -18,6 +18,10 @@ $quantidade = count($listaDeFabricantes);
         *{
             font-family: 'Noto Sans', sans-serif;
         }
+
+        body{
+            background-color: aliceblue;
+        }
         table, th, td{
             border: 1px solid black;
             border-collapse: collapse;
@@ -71,7 +75,7 @@ $quantidade = count($listaDeFabricantes);
     <tr>
         <td><?=$dados_fabricante['id']?></td>
         <td class="width"><?=$dados_fabricante['nome']?></td>
-        <td class="width"><a href="">Editar</a> | <a href="">Excluir</a></td>
+        <td class="width"><a href="editar.php?id=<?=$dados_fabricante['id']?>">Editar</a> | <a href="">Excluir</a></td>
     </tr>
     <?php
         }
