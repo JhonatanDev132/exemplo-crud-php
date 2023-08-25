@@ -25,7 +25,7 @@ function lerFabricantes(PDO $conexao){
 
 // Teste 
 $dados = lerFabricantes($conexao);
-var_dump($dados);
+// var_dump($dados);
 
 // Usada em fabricantes/inserir.php
 function inserirFabricante(PDO $conexao, string $nomeDoFabricante){

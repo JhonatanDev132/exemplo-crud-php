@@ -1,9 +1,13 @@
 <?php
+require_once '../src/funcoes-fabricantes.php';
+
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-echo $id;
-?>
+/* Chamando a função e recuperando os dados de um
+ fabricante de acordo com o id passado. */
 
+$fabricante = lerUmFabricante($conexao, $id);
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,9 +52,13 @@ echo $id;
 
     <section>
     <form action="" method="post">
+        <!-- Campo oculto usado apenas para registro no formulário do
+    id do fabricante que está sendo vizualizado. -->
+        <input type="hidden" name="id" value="<?=$fabricante['id']?>">
+
         <p>
         <label for="nome"></label>
-        <input required type="text" name="nome" id="nome" placeholder="Nome:">
+        <input value="<?=$fabricante['nome']?>" required type="text" name="nome" id="nome" placeholder="Nome:">
         </p>
 
         <button type="submit" name="atualizar">Atuaizar fabricante</button>
