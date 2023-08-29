@@ -37,21 +37,19 @@ $listaDeProdutos = lerProdutos($conexao);
     <hr>
     <h2>Lendo e carregando todos os produtos.</h2>
 
-    <p><a href="inserir.php">
+    <p><a href="inserirp.php">
         Inserir novo produto</a></p>
 
     <div class="produtos">
 
-
     <?php foreach ( $listaDeProdutos as $produto ){ ?>
         <article class="produto">
-            <h3><?=$produto["nome"]?></h3>
+            <h3><?=$produto["produto"]?> - <i><?=$produto["fabricante"]?></i></h3>
             <p><b>Preço: <?=formataPreco($produto["preco"])?></b> </p>
             <p><b>Quantidade:</b> <?=$produto["quantidade"]?> </p>
+            <p><b>Total: <?=calcularTotal($produto['preco'], $produto['quantidade'])?></b></p>
         </article>
-    <?php
-    }
-    ?>
+    <?php } ?>
         
     </div>
 
