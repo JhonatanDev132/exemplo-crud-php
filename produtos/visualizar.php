@@ -48,6 +48,13 @@ $listaDeProdutos = lerProdutos($conexao);
             <p><b>Preço: <?=formataPreco($produto["preco"])?></b> </p>
             <p><b>Quantidade:</b> <?=$produto["quantidade"]?> </p>
             <p><b>Total: <?=calcularTotal($produto['preco'], $produto['quantidade'])?></b></p>
+        
+            <hr>
+            <p>
+                <a href="atualizar.php?id=<?=$produto["id"]?>">Editar</a>
+                |
+                <a href="excluir.php?id=<?=$fabricante["id"]?>">Excluir</a>
+            </p>
         </article>
     <?php } ?>
         

@@ -25,3 +25,50 @@ function lerProdutos(PDO $conexao):array {
     
     return $resultado;
 }   
+
+function inserirProduto(
+    PDO $conexao,
+    string $nome, 
+    int $fabricanteid, 
+    float $preco, 
+    int $quantidade, 
+    string $descricao
+):void{
+    $sql = "INSERT INTO produtos(
+        nome, preco, quantidade, descricao, fabricante_id
+    ) VALUES(
+        :nome, :preco, :quantidade, :descricao, :fabricanteid
+    )";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(":nome", $nome, PDO::PARAM_STR);
+
+        $consulta->bindValue(":preco", $preco, PDO::PARAM_STR);
+
+        $consulta->bindValue(":quantidade", $quantidade, PDO::PARAM_INT);
+        $consulta->bindValue(":descricao", $descricao, PDO::PARAM_STR);
+        $consulta->bindValue(":fabricanteid", $fabricanteid, PDO::PARAM_INT);
+
+        $consulta->execute();
+    } catch (Exception $erro) {
+        die("Erro ao inserir: ".$erro->getMessage());
+    }
+}
+
+function lerUmProduto(PDO $conexao, int $idProduto, ):array{
+    $sql = "SELECT nome, preco, quantidade, descricao, fabricante_id FROM produtos WHERE id = :id";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(":id", $idProduto, PDO::PARAM_INT);
+        
+        $consulta->execute();
+
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro ao carregar: ".$erro->getMessage());
+    }
+
+    return $resultado;
+} // fim lerUmProduto
